@@ -1,3 +1,8 @@
+import ddf.minim.*;
+ 
+Minim minim;
+AudioPlayer meow;
+
 MotionDetector motionDetector;
 
 PImage[] cat = new PImage[45];
@@ -6,6 +11,9 @@ int catIndex = 0;
 void setup() {
   size(400, 700);
   frameRate(5);
+  
+  minim = new Minim(this);
+  meow = minim.loadFile("cat-meow.wav");
   
   for (int index = 0; index < 45; index++) {
     String prefix = "cat-";
@@ -17,6 +25,7 @@ void setup() {
   }
   
   motionDetector = new MotionDetector(this, width, height, true);
+  
 }
 
 void draw() {
@@ -37,6 +46,9 @@ void draw() {
   } else {
     println("movement");
     image(cat[catIndex], 75, 50);
+    if (catIndex == 32) {
+      meow.play();
+    }
     if (catIndex < cat.length - 1) {
       catIndex++;
     } else {
