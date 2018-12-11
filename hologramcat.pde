@@ -2,6 +2,7 @@ import ddf.minim.*;
  
 Minim minim;
 AudioPlayer meow;
+AudioPlayer purr;
 
 MotionDetector motionDetector;
 
@@ -13,7 +14,9 @@ void setup() {
   frameRate(5);
   
   minim = new Minim(this);
-  meow = minim.loadFile("cat-meow.wav");
+  meow = minim.loadFile("meow.wav");
+  purr = minim.loadFile("purr.wav");
+  //purr.play();
   
   for (int index = 0; index < 45; index++) {
     String prefix = "cat-";
@@ -48,6 +51,7 @@ void draw() {
     image(cat[catIndex], 75, 50);
     if (catIndex == 32) {
       meow.play();
+      meow = minim.loadFile("meow.wav");
     }
     if (catIndex < cat.length - 1) {
       catIndex++;
